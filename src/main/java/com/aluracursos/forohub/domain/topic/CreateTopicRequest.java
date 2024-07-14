@@ -2,6 +2,8 @@ package com.aluracursos.forohub.domain.topic;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDateTime;
+
 public record CreateTopicRequest(
         @NotNull
         String title,
@@ -10,8 +12,10 @@ public record CreateTopicRequest(
         @NotNull
         String status,
         @NotNull
-        Long author_id,
+        Long authorId,
         @NotNull
-        Long course_id
+        Long courseId,
+        @NotNull
+        LocalDateTime creationDate
 ) {
 }

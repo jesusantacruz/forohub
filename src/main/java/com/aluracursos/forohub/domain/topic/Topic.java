@@ -36,4 +36,11 @@ public class Topic {
     @ManyToOne
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
+
+    public Topic(CreateTopicRequest createTopicRequest) {
+        this.title = createTopicRequest.title();
+        this.message = createTopicRequest.message();
+        this.creationDate = createTopicRequest.creationDate();
+        this.status = createTopicRequest.status();
+    }
 }

@@ -26,10 +26,9 @@ public class SecurityConfigurations {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/login").permitAll()
                         .anyRequest().authenticated()
-                )
-                .formLogin(withDefaults());
+                );
         return http.build();
     }
 

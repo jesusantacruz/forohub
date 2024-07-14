@@ -8,9 +8,9 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
+@Table(name = "courses")
 @Getter
 @Setter
-@Table(name = "courses")
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
