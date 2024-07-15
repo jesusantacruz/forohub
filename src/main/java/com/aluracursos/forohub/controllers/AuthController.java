@@ -4,6 +4,7 @@ import com.aluracursos.forohub.domain.users.User;
 import com.aluracursos.forohub.domain.users.UserAuthData;
 import com.aluracursos.forohub.security.TokenJWTData;
 import com.aluracursos.forohub.security.TokenService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,12 +27,14 @@ public class AuthController {
     @Autowired
     private TokenService tokenService;
 
+    @Transactional
     @PostMapping
-    public ResponseEntity<TokenJWTData> autenticarUsuario(@RequestBody @Valid UserAuthData userAuthData) {
+    public ResponseEntity<TokenJWTData> authUser(@RequestBody @Valid UserAuthData userAuthData) {
         Authentication authToken = new UsernamePasswordAuthenticationToken(userAuthData.username(),
                 userAuthData.pass());
         var authUser = authenticationManager.authenticate(authToken);
-        var jwtTtoken = tokenService.makeToken((User) authUser);
+        System.out.println(authUser);
+        var jwtTtoken = tokenService.makeToken((User) authUser.getPrincipal());
         return ResponseEntity.ok(new TokenJWTData(jwtTtoken));
     }
 

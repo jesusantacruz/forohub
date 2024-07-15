@@ -24,15 +24,18 @@ public class SecurityFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         var authHeader = request.getHeader("Authorization");
         if (authHeader != null) {
+            System.out.println("authHeader not null");
             var token = authHeader.replace("Bearer ", "");
             var username = tokenService.getSubject(token);
             if (username != null) {
+                System.out.println("username not null");
                 var user = userRepository.findByUsername(username);
                 var authentication = new UsernamePasswordAuthenticationToken(user, null,
                         user.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }
+        System.out.println("Si hace la entrada aqki");
         filterChain.doFilter(request, response);
     }
 }

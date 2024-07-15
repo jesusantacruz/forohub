@@ -3,7 +3,9 @@ package com.aluracursos.forohub.domain.topic;
 import com.aluracursos.forohub.domain.course.Course;
 import com.aluracursos.forohub.domain.users.User;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -12,6 +14,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Table(name = "topics")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Topic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
